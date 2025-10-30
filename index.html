@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal de Denúncia Anônima</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Canal de Denúncia</h1>
+                <p>Anônimo e Confidencial</p>
+            </div>
+            <div class="security-badge">
+                <span>🔒</span>
+                <p>100% Anônimo</p>
+            </div>
+            <button id="adminBtn" class="btn-admin">Área da CIPA</button>
+        </header>
+
+        <main>
+            <section class="intro-section">
+                <h2>Seja ouvido com segurança</h2>
+                <p>Este canal permite que você reporte situações de assédio moral, sexual ou qualquer outra violação de forma totalmente anônima e segura.</p>
+                <div class="features">
+                    <div class="feature">
+                        <span>🛡️</span>
+                        <p>Proteção da sua identidade</p>
+                    </div>
+                    <div class="feature">
+                        <span>📝</span>
+                        <p>Formulário simplificado</p>
+                    </div>
+                    <div class="feature">
+                        <span>⚖️</span>
+                        <p>Encaminhamento para CIPA</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Faça sua denúncia</h2>
+                <form id="denunciaForm">
+                    <div class="form-group">
+                        <label for="tipo-denuncia">Tipo de Denúncia *</label>
+                        <select id="tipo-denuncia" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="assedio-moral">Assédio Moral</option>
+                            <option value="assedio-sexual">Assédio Sexual</option>
+                            <option value="discriminacao">Discriminação</option>
+                            <option value="violencia">Violência</option>
+                            <option value="assedio-virtual">Assédio Virtual</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data-ocorrencia">Data da Ocorrência</label>
+                        <input type="date" id="data-ocorrencia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="local-ocorrencia">Local da Ocorrência</label>
+                        <input type="text" id="local-ocorrencia" placeholder="Ex: Setor de Produção, Refeitório...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="envolvidos">Pessoas Envolvidas</label>
+                        <textarea id="envolvidos" placeholder="Descreva quem estava envolvido (sem se identificar)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição da Ocorrência *</label>
+                        <textarea id="descricao" required placeholder="Descreva detalhadamente o que aconteceu..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="evidencias">Evidências (opcional)</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div class="upload-placeholder">
+                                <span>📎</span>
+                                <p>Arraste arquivos aqui ou clique para selecionar</p>
+                                <p class="file-types">Suporte: Imagens, PDF, Word, Excel (Máx. 5MB cada)</p>
+                            </div>
+                            <input type="file" id="evidencias" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xls,.xlsx" style="display: none;">
+                            <div class="file-preview" id="filePreview"></div>
+                        </div>
+                    </div>
+
+                    <div class="anonymity-notice">
+                        <p>⚠️ <strong>Importante:</strong> Este canal é 100% anônimo. Não coleta dados pessoais e não rastreia informações que possam identificar você.</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Enviar Denúncia</button>
+                        <button type="reset" class="btn-clear">Limpar Formulário</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="info-section">
+                <h2>Como funciona o processo</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Denúncia</h3>
+                        <p>Você preenche o formulário com os detalhes da ocorrência.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Análise</h3>
+                        <p>A CIPA analisa a denúncia preservando seu anonimato.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Ação</h3>
+                        <p>São tomadas as medidas cabíveis para resolver a situação.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Canal de Denúncia Anônima - Desenvolvido para a CIPA</p>
+            <p>Este sistema opera apenas em ambiente local da empresa.</p>
+        </footer>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-icon">✅</div>
+            <h2>Denúncia Enviada com Sucesso!</h2>
+            <p>Sua denúncia foi registrada com sucesso e será encaminhada para a CIPA.</p>
+            <p><strong>Lembre-se:</strong> Não coletamos nenhuma informação que possa identificá-lo.</p>
+            <button id="modalClose" class="btn-modal">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Login da CIPA -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-icon">🔐</div>
+            <h2>Acesso da CIPA</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Entrar</button>
+                    <button type="button" class="btn-clear" id="loginCancel">Cancelar</button>
+                </div>
+            </form>
+            <div class="login-info">
+                <p><strong>Credenciais padrão:</strong></p>
+                <p>Usuário: <code>cipa</code> | Senha: <code>cipa2024</code></p>
+                <p class="warning">⚠️ Altere estas credenciais após o primeiro acesso!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal da Área da CIPA -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content admin-content">
+            <span class="close">&times;</span>
+            <h2>Área da CIPA - Denúncias Recebidas</h2>
+            
+            <div class="admin-controls">
+                <div class="admin-actions">
+                    <button id="exportBtn" class="btn-admin-action">Exportar para CSV</button>
+                    <button id="exportAllBtn" class="btn-admin-action">Exportar Tudo (ZIP)</button>
+                    <button id="clearAllBtn" class="btn-admin-action btn-clear">Limpar Todas</button>
+                </div>
+                <div class="admin-config">
+                    <button id="configBtn" class="btn-admin-action">Configurar Acesso</button>
+                </div>
+            </div>
+            
+            <div class="filters">
+                <select id="filterTipo">
+                    <option value="">Todos os tipos</option>
+                    <option value="assedio-moral">Assédio Moral</option>
+                    <option value="assedio-sexual">Assédio Sexual</option>
+                    <option value="discriminacao">Discriminação</option>
+                    <option value="violencia">Violência</option>
+                    <option value="assedio-virtual">Assédio Virtual</option>
+                    <option value="outro">Outro</option>
+                </select>
+                <input type="date" id="filterData" placeholder="Filtrar por data">
+                <button id="applyFilter" class="btn-admin-action">Aplicar Filtro</button>
+                <button id="clearFilter" class="btn-clear">Limpar Filtro</button>
+            </div>
+            
+            <div class="denuncias-list">
+                <div id="denunciasContainer">
+                    <!-- As denúncias serão carregadas aqui -->
+                </div>
+            </div>
+            
+            <div class="admin-stats">
+                <h3>Estatísticas</h3>
+                <div id="statsContainer">
+                    <!-- Estatísticas serão carregadas aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Configuração -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Configurações de Acesso</h2>
+            <form id="configForm">
+                <div class="form-group">
+                    <label for="newUsername">Novo Usuário</label>
+                    <input type="text" id="newUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Nova Senha</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Senha</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Salvar</button>
+                    <button type="button" class="btn-clear" id="configCancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

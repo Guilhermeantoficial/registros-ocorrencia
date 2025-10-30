@@ -1,0 +1,650 @@
+/* css/styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e1e5eb;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.logo h1 {
+    color: #2c3e50;
+    font-size: 28px;
+}
+
+.logo p {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.security-badge {
+    display: flex;
+    align-items: center;
+    background-color: #e8f4fd;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.security-badge span {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.security-badge p {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.btn-admin {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn-admin:hover {
+    background-color: #1a252f;
+}
+
+/* Intro Section */
+.intro-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.intro-section h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.intro-section p {
+    color: #5d6d7e;
+    margin-bottom: 20px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    flex: 1;
+    min-width: 200px;
+}
+
+.feature span {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Form Section */
+.form-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* File Upload Styles */
+.file-upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.file-upload-area:hover {
+    border-color: #3498db;
+    background-color: #f8f9fa;
+}
+
+.file-upload-area.dragover {
+    border-color: #3498db;
+    background-color: #e3f2fd;
+}
+
+.upload-placeholder span {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.upload-placeholder p {
+    margin: 5px 0;
+    color: #5d6d7e;
+}
+
+.file-types {
+    font-size: 12px !important;
+    color: #7f8c8d !important;
+}
+
+.file-preview {
+    margin-top: 15px;
+    display: none;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.file-icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.file-name {
+    font-weight: 500;
+}
+
+.file-size {
+    color: #7f8c8d;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.file-remove {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.file-remove:hover {
+    color: #c0392b;
+}
+
+.anonymity-notice {
+    background-color: #fff8e1;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #ffc107;
+    margin: 20px 0;
+}
+
+.anonymity-notice p {
+    margin: 0;
+    color: #856404;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-submit, .btn-clear, .btn-modal, .btn-admin-action {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit {
+    background-color: #3498db;
+    color: white;
+    flex: 2;
+}
+
+.btn-submit:hover {
+    background-color: #2980b9;
+}
+
+.btn-clear {
+    background-color: #e0e0e0;
+    color: #333;
+    flex: 1;
+}
+
+.btn-clear:hover {
+    background-color: #d0d0d0;
+}
+
+.btn-modal {
+    background-color: #3498db;
+    color: white;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.btn-modal:hover {
+    background-color: #2980b9;
+}
+
+.btn-admin-action {
+    background-color: #3498db;
+    color: white;
+    margin: 5px;
+}
+
+.btn-admin-action:hover {
+    background-color: #2980b9;
+}
+
+.btn-admin-action.btn-clear {
+    background-color: #e74c3c;
+}
+
+.btn-admin-action.btn-clear:hover {
+    background-color: #c0392b;
+}
+
+/* Info Section */
+.info-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.info-section h2 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.step {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    padding: 20px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-weight: bold;
+}
+
+.step h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.step p {
+    color: #5d6d7e;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #7f8c8d;
+    font-size: 14px;
+    border-top: 1px solid #e1e5eb;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.admin-content {
+    text-align: left;
+    max-width: 900px;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #7f8c8d;
+}
+
+.modal-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #5d6d7e;
+    margin-bottom: 10px;
+}
+
+/* Login Info */
+.login-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff8e1;
+    border-radius: 6px;
+    border-left: 4px solid #ffc107;
+}
+
+.login-info code {
+    background-color: #f1f1f1;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.warning {
+    color: #856404;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Área de Administração */
+.admin-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.admin-actions, .admin-config {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filters select, .filters input {
+    flex: 1;
+    min-width: 150px;
+}
+
+.denuncias-list {
+    margin-bottom: 30px;
+}
+
+.denuncia-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.denuncia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.denuncia-tipo {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.denuncia-data {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.denuncia-content {
+    margin-bottom: 10px;
+}
+
+.denuncia-content p {
+    margin-bottom: 5px;
+}
+
+.denuncia-evidencias {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.evidencia-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.evidencia-item img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.evidencia-info {
+    flex: 1;
+}
+
+.evidencia-download {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.evidencia-download:hover {
+    background-color: #2980b9;
+}
+
+.admin-stats {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.no-denuncias {
+    text-align: center;
+    padding: 40px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .security-badge {
+        margin-top: 0;
+    }
+    
+    .features, .process-steps {
+        flex-direction: column;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn-submit, .btn-clear {
+        flex: 1;
+        width: 100%;
+    }
+    
+    .admin-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .admin-controls button {
+        width: 100%;
+    }
+    
+    .denuncia-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .filters {
+        flex-direction: column;
+    }
+    
+    .filters select, .filters input {
+        width: 100%;
+    }
+}
