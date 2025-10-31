@@ -3,52 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Canal de Denúncia Anônima e Confidencial para reportar situações de forma segura">
     <title>Canal de Denúncia Anônima</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Incluir JSZip e CryptoJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header role="banner">
             <div class="logo">
                 <h1>Canal de Denúncia</h1>
                 <p>Anônimo e Confidencial</p>
             </div>
             <div class="security-badge">
-                <span>🔒</span>
+                <span aria-hidden="true">🔒</span>
                 <p>100% Anônimo</p>
             </div>
-            <button id="adminBtn" class="btn-admin">Área da CIPA</button>
+            <div class="header-actions">
+                <button id="adminBtn" class="btn-admin" type="button">Área da CIPA</button>
+                <div class="acompanhamento-link">
+                    <a href="#secaoAcompanhamento" onclick="mostrarAcompanhamento()">📋 Acompanhar denúncia</a>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <section class="intro-section">
-                <h2>Seja ouvido com segurança</h2>
-                <p>Este canal permite que você reporte situações de assédio moral, sexual ou qualquer outra violação de forma totalmente anônima e segura.</p>
+        <main role="main">
+            <section class="intro-section" aria-labelledby="intro-title">
+                <h2 id="intro-title">Seja ouvido com segurança</h2>
+                <p>Este canal permite que você reporte situações de forma totalmente anônima e segura, com acompanhamento em tempo real e sincronização entre todos os dispositivos.</p>
                 <div class="features">
                     <div class="feature">
-                        <span>🛡️</span>
-                        <p>Proteção da sua identidade</p>
+                        <span aria-hidden="true">🛡️</span>
+                        <p>Proteção total da sua identidade</p>
                     </div>
                     <div class="feature">
-                        <span>📝</span>
-                        <p>Formulário simplificado</p>
+                        <span aria-hidden="true">📝</span>
+                        <p>Formulário simples e intuitivo</p>
                     </div>
                     <div class="feature">
-                        <span>⚖️</span>
-                        <p>Encaminhamento para CIPA</p>
+                        <span aria-hidden="true">⚖️</span>
+                        <p>Encaminhamento direto para CIPA</p>
+                    </div>
+                    <div class="feature">
+                        <span aria-hidden="true">📄</span>
+                        <p>Protocolo de acompanhamento único</p>
                     </div>
                 </div>
             </section>
 
-            <section class="form-section">
-                <h2>Faça sua denúncia</h2>
-                <form id="denunciaForm">
+            <section class="form-section" aria-labelledby="form-title">
+                <h2 id="form-title">Faça sua denúncia</h2>
+                <form id="denunciaForm" novalidate>
                     <div class="form-group">
                         <label for="tipo-denuncia">Tipo de Denúncia *</label>
-                        <select id="tipo-denuncia" required>
+                        <select id="tipo-denuncia" required aria-required="true">
                             <option value="">Selecione o tipo</option>
                             <option value="assedio-moral">Assédio Moral</option>
                             <option value="assedio-sexual">Assédio Sexual</option>
@@ -61,7 +70,7 @@
 
                     <div class="form-group">
                         <label for="tipo-envolvimento">A denúncia é para *</label>
-                        <select id="tipo-envolvimento" required>
+                        <select id="tipo-envolvimento" required aria-required="true">
                             <option value="">Selecione</option>
                             <option value="foi-comigo">Foi comigo</option>
                             <option value="presenciei">Presenciei</option>
@@ -87,23 +96,23 @@
 
                     <div class="form-group">
                         <label for="descricao">Descrição da Ocorrência *</label>
-                        <textarea id="descricao" required placeholder="Descreva detalhadamente o que aconteceu..."></textarea>
+                        <textarea id="descricao" required aria-required="true" placeholder="Descreva detalhadamente o que aconteceu..."></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="evidencias">Evidências (opcional)</label>
-                        <div class="file-upload-area" id="fileUploadArea">
+                        <div class="file-upload-area" id="fileUploadArea" role="button" tabindex="0">
                             <div class="upload-placeholder">
-                                <span>📎</span>
+                                <span aria-hidden="true">📎</span>
                                 <p>Arraste arquivos aqui ou clique para selecionar</p>
                                 <p class="file-types">Suporte: Imagens, PDF, Word, Excel (Máx. 5MB cada)</p>
                             </div>
-                            <input type="file" id="evidencias" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xls,.xlsx" style="display: none;">
-                            <div class="file-preview" id="filePreview"></div>
+                            <input type="file" id="evidencias" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xls,.xlsx" style="display: none;" aria-describedby="file-types">
+                            <div class="file-preview" id="filePreview" role="region" aria-live="polite"></div>
                         </div>
                     </div>
 
-                    <div class="anonymity-notice">
+                    <div class="anonymity-notice" role="alert">
                         <p>⚠️ <strong>Importante:</strong> Este canal é 100% anônimo. Não coleta dados pessoais e não rastreia informações que possam identificar você.</p>
                     </div>
 
@@ -114,51 +123,99 @@
                 </form>
             </section>
 
-            <section class="info-section">
-                <h2>Como funciona o processo</h2>
+            <section class="protocolo-section" id="secaoAcompanhamento" aria-labelledby="acompanhamento-title">
+                <div class="container">
+                    <h2 id="acompanhamento-title">Acompanhar Denúncia</h2>
+                    <p class="section-description">Digite o número do protocolo para acompanhar o andamento da sua denúncia de forma anônima e segura.</p>
+                    <div class="form-group">
+                        <label for="inputProtocolo">Número do Protocolo</label>
+                        <input type="text" id="inputProtocolo" placeholder="Ex: CIPA-20241201-ABC12">
+                    </div>
+                    <button type="button" onclick="acompanharDenuncia()" class="btn-submit">🔍 Acompanhar Denúncia</button>
+                    <div id="statusDenuncia" class="status-container" role="region" aria-live="polite"></div>
+                </div>
+            </section>
+
+            <section class="info-section" aria-labelledby="info-title">
+                <h2 id="info-title">Como funciona o processo</h2>
                 <div class="process-steps">
                     <div class="step">
                         <div class="step-number">1</div>
                         <h3>Denúncia</h3>
-                        <p>Você preenche o formulário com os detalhes da ocorrência.</p>
+                        <p>Você preenche o formulário com os detalhes da ocorrência e recebe um protocolo único de acompanhamento.</p>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
                         <h3>Análise</h3>
-                        <p>A CIPA analisa a denúncia preservando seu anonimato.</p>
+                        <p>A CIPA analisa a denúncia preservando totalmente seu anonimato e inicia as investigações necessárias.</p>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <h3>Ação</h3>
-                        <p>São tomadas as medidas cabíveis para resolver a situação.</p>
+                        <h3>Acompanhamento</h3>
+                        <p>Use seu protocolo para acompanhar o andamento em qualquer dispositivo, a qualquer momento.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Resolução</h3>
+                        <p>São tomadas as medidas cabíveis para resolver a situação, sempre mantendo a confidencialidade.</p>
                     </div>
                 </div>
             </section>
         </main>
 
-        <footer>
+        <footer role="contentinfo">
             <p>Canal de Denúncia Anônima - Desenvolvido para a CIPA</p>
+            <p>Este sistema opera em ambiente seguro com sincronização entre dispositivos.</p>
         </footer>
     </div>
 
     <!-- Modal de confirmação -->
-    <div id="confirmationModal" class="modal">
+    <div id="confirmationModal" class="modal" role="dialog" aria-labelledby="confirmationTitle" aria-hidden="true">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-icon">✅</div>
-            <h2>Denúncia Enviada com Sucesso!</h2>
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">✅</div>
+            <h2 id="confirmationTitle">Denúncia Enviada com Sucesso!</h2>
             <p>Sua denúncia foi registrada com sucesso e será encaminhada para a CIPA.</p>
             <p><strong>Lembre-se:</strong> Não coletamos nenhuma informação que possa identificá-lo.</p>
             <button id="modalClose" class="btn-modal">Fechar</button>
         </div>
     </div>
 
-    <!-- Modal de Login da CIPA -->
-    <div id="loginModal" class="modal">
+    <!-- Modal de Protocolo -->
+    <div id="protocoloModal" class="modal" role="dialog" aria-labelledby="protocoloTitle" aria-hidden="true">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-icon">🔐</div>
-            <h2>Acesso da CIPA</h2>
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">📄</div>
+            <h2 id="protocoloTitle">Protocolo de Acompanhamento</h2>
+            <div class="protocolo-info">
+                <p><strong>Número do Protocolo:</strong></p>
+                <div class="protocolo-number" id="protocoloNumber" aria-live="polite"></div>
+                <p class="protocolo-instructions">
+                    🔒 <strong>Guarde este número!</strong><br>
+                    Este é o único modo de acompanhar sua denúncia preservando o anonimato.
+                </p>
+                <div class="protocolo-tips">
+                    <p>📋 <strong>Dicas:</strong></p>
+                    <ul>
+                        <li>Salve o número em um local seguro</li>
+                        <li>Use o link "Acompanhar denúncia" no topo da página</li>
+                        <li>O protocolo funciona em qualquer dispositivo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="protocolo-actions">
+                <button type="button" onclick="copiarProtocolo()" class="btn-submit">📋 Copiar Protocolo</button>
+                <button type="button" onclick="fecharProtocolo()" class="btn-clear">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login da CIPA -->
+    <div id="loginModal" class="modal" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">🔐</div>
+            <h2 id="loginTitle">Acesso da CIPA</h2>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Usuário</label>
@@ -182,14 +239,17 @@
     </div>
 
     <!-- Modal da Área da CIPA -->
-    <div id="adminModal" class="modal">
+    <div id="adminModal" class="modal" role="dialog" aria-labelledby="adminTitle" aria-hidden="true">
         <div class="modal-content admin-content">
-            <span class="close">&times;</span>
-            <h2>Área da CIPA - Denúncias Recebidas</h2>
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <h2 id="adminTitle">Área da CIPA - Denúncias Recebidas</h2>
             
             <div class="admin-controls">
                 <div class="admin-actions">
-                    <button id="exportBtn" class="btn-admin-action">Exportar para CSV</button>
+                    <button id="exportBtn" class="btn-admin-action" type="button">Exportar para CSV</button>
+                </div>
+                <div class="sync-status">
+                    <span id="syncIndicator" class="sync-indicator">🔄 Sincronizado</span>
                 </div>
             </div>
             
@@ -225,22 +285,119 @@
                 </div>
                 
                 <div class="filter-actions">
-                    <button id="applyFilter" class="btn-admin-action">Aplicar Filtro</button>
-                    <button id="clearFilter" class="btn-clear">Limpar Filtro</button>
+                    <button id="applyFilter" class="btn-admin-action" type="button">Aplicar Filtro</button>
+                    <button id="clearFilter" class="btn-clear" type="button">Limpar Filtro</button>
                 </div>
             </div>
             
+            <div id="contadorResultados"></div>
+            
             <div class="denuncias-list">
-                <div id="denunciasContainer">
+                <div id="denunciasContainer" role="region" aria-live="polite">
                     <!-- As denúncias serão carregadas aqui -->
                 </div>
             </div>
             
             <div class="admin-stats">
                 <h3>Estatísticas</h3>
-                <div id="statsContainer">
+                <div id="statsContainer" role="region" aria-live="polite">
                     <!-- Estatísticas serão carregadas aqui -->
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Adicionar Observação -->
+    <div id="modalObservacao" class="modal-personalizado modal-observacao" role="dialog" aria-labelledby="observacaoTitle" aria-hidden="true">
+        <div class="modal-personalizado-content">
+            <div class="modal-personalizado-header">
+                <div class="modal-personalizado-icon" aria-hidden="true">📝</div>
+                <h3 class="modal-personalizado-title" id="observacaoTitle">Adicionar Observação</h3>
+            </div>
+            <div class="modal-personalizado-body">
+                <label class="modal-personalizado-label">
+                    Observação para a denúncia:
+                    <span class="modal-tooltip" data-tooltip="Esta observação ficará visível no acompanhamento da denúncia">ℹ️</span>
+                </label>
+                <textarea 
+                    id="textareaObservacao" 
+                    class="modal-personalizado-textarea" 
+                    placeholder="Digite aqui as observações sobre o andamento desta denúncia..."
+                    maxlength="500"
+                    aria-describedby="contadorObservacao"
+                ></textarea>
+                <div style="text-align: right; margin-top: 5px; font-size: 12px; color: #7f8c8d;">
+                    <span id="contadorObservacao">0</span>/500 caracteres
+                </div>
+            </div>
+            <div class="modal-personalizado-actions">
+                <button type="button" class="modal-personalizado-btn modal-personalizado-btn-secondary" onclick="fecharModalObservacao()">
+                    Cancelar
+                </button>
+                <button type="button" class="modal-personalizado-btn modal-personalizado-btn-primary" onclick="salvarObservacao()">
+                    ✅ Salvar Observação
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Atualizar Status -->
+    <div id="modalStatus" class="modal-personalizado modal-status" role="dialog" aria-labelledby="statusTitle" aria-hidden="true">
+        <div class="modal-personalizado-content">
+            <div class="modal-personalizado-header">
+                <div class="modal-personalizado-icon" aria-hidden="true">🔄</div>
+                <h3 class="modal-personalizado-title" id="statusTitle">Atualizar Status</h3>
+            </div>
+            <div class="modal-personalizado-body">
+                <label class="modal-personalizado-label">
+                    Selecione o novo status:
+                    <span class="modal-tooltip" data-tooltip="O status define a fase atual do processo da denúncia">ℹ️</span>
+                </label>
+                
+                <div class="status-options-container" id="opcoesStatus">
+                    <div class="status-option" onclick="selecionarStatus('recebida')" role="button" tabindex="0">
+                        <span class="status-badge-modal status-recebida">Recebida</span>
+                        <span style="font-size: 14px; color: #5d6d7e;">Denúncia recebida e aguardando análise inicial</span>
+                    </div>
+                    
+                    <div class="status-option" onclick="selecionarStatus('analise')" role="button" tabindex="0">
+                        <span class="status-badge-modal status-analise">Em Análise</span>
+                        <span style="font-size: 14px; color: #5d6d7e;">Em processo de análise pela equipe da CIPA</span>
+                    </div>
+                    
+                    <div class="status-option" onclick="selecionarStatus('andamento')" role="button" tabindex="0">
+                        <span class="status-badge-modal status-andamento">Em Andamento</span>
+                        <span style="font-size: 14px; color: #5d6d7e;">Ações estão sendo tomadas para resolver a situação</span>
+                    </div>
+                    
+                    <div class="status-option" onclick="selecionarStatus('concluida')" role="button" tabindex="0">
+                        <span class="status-badge-modal status-concluida">Concluída</span>
+                        <span style="font-size: 14px; color: #5d6d7e;">Processo finalizado com as devidas medidas</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <label class="modal-personalizado-label">Observação adicional (opcional):</label>
+                    <textarea 
+                        id="textareaStatusObs" 
+                        class="modal-personalizado-textarea" 
+                        placeholder="Observação sobre a mudança de status..."
+                        style="min-height: 80px;"
+                        maxlength="300"
+                        aria-describedby="contadorStatusObs"
+                    ></textarea>
+                    <div style="text-align: right; margin-top: 5px; font-size: 12px; color: #7f8c8d;">
+                        <span id="contadorStatusObs">0</span>/300 caracteres
+                    </div>
+                </div>
+            </div>
+            <div class="modal-personalizado-actions">
+                <button type="button" class="modal-personalizado-btn modal-personalizado-btn-secondary" onclick="fecharModalStatus()">
+                    Cancelar
+                </button>
+                <button type="button" class="modal-personalizado-btn modal-personalizado-btn-primary" onclick="salvarStatus()">
+                    ✅ Atualizar Status
+                </button>
             </div>
         </div>
     </div>
