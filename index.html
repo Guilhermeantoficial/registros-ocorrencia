@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canal de Denúncia Anônima</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Incluir JSZip e CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -57,18 +60,29 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tipo-envolvimento">A denúncia é para *</label>
+                        <select id="tipo-envolvimento" required>
+                            <option value="">Selecione</option>
+                            <option value="foi-comigo">Foi comigo</option>
+                            <option value="presenciei">Presenciei</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="data-ocorrencia">Data da Ocorrência</label>
                         <input type="date" id="data-ocorrencia">
                     </div>
 
                     <div class="form-group">
                         <label for="local-ocorrencia">Local da Ocorrência</label>
-                        <input type="text" id="local-ocorrencia" placeholder="Ex: Setor de Produção, Refeitório...">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="envolvidos">Pessoas Envolvidas</label>
-                        <textarea id="envolvidos" placeholder="Descreva quem estava envolvido (sem se identificar)"></textarea>
+                        <select id="local-ocorrencia">
+                            <option value="">Selecione o local</option>
+                            <option value="home-office">Home office</option>
+                            <option value="ufjf">UFJF</option>
+                            <option value="unidade-br-040">Unidade BR 040</option>
+                            <option value="unidade-dom-orione">Unidade Dom Orione</option>
+                            <option value="unidade-sao-mateus">Unidade São Mateus</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -124,7 +138,6 @@
 
         <footer>
             <p>Canal de Denúncia Anônima - Desenvolvido para a CIPA</p>
-            <p>Este sistema opera apenas em ambiente local da empresa.</p>
         </footer>
     </div>
 
@@ -177,27 +190,44 @@
             <div class="admin-controls">
                 <div class="admin-actions">
                     <button id="exportBtn" class="btn-admin-action">Exportar para CSV</button>
-                    <button id="exportAllBtn" class="btn-admin-action">Exportar Tudo (ZIP)</button>
-                    <button id="clearAllBtn" class="btn-admin-action btn-clear">Limpar Todas</button>
-                </div>
-                <div class="admin-config">
-                    <button id="configBtn" class="btn-admin-action">Configurar Acesso</button>
                 </div>
             </div>
             
             <div class="filters">
-                <select id="filterTipo">
-                    <option value="">Todos os tipos</option>
-                    <option value="assedio-moral">Assédio Moral</option>
-                    <option value="assedio-sexual">Assédio Sexual</option>
-                    <option value="discriminacao">Discriminação</option>
-                    <option value="violencia">Violência</option>
-                    <option value="assedio-virtual">Assédio Virtual</option>
-                    <option value="outro">Outro</option>
-                </select>
-                <input type="date" id="filterData" placeholder="Filtrar por data">
-                <button id="applyFilter" class="btn-admin-action">Aplicar Filtro</button>
-                <button id="clearFilter" class="btn-clear">Limpar Filtro</button>
+                <div class="filter-group">
+                    <label for="filterTipo">Tipo de Denúncia:</label>
+                    <select id="filterTipo">
+                        <option value="">Todos os tipos</option>
+                        <option value="assedio-moral">Assédio Moral</option>
+                        <option value="assedio-sexual">Assédio Sexual</option>
+                        <option value="discriminacao">Discriminação</option>
+                        <option value="violencia">Violência</option>
+                        <option value="assedio-virtual">Assédio Virtual</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filterData">Data da Ocorrência:</label>
+                    <input type="date" id="filterData">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filterLocal">Local:</label>
+                    <select id="filterLocal">
+                        <option value="">Todos os locais</option>
+                        <option value="home-office">Home office</option>
+                        <option value="ufjf">UFJF</option>
+                        <option value="unidade-br-040">Unidade BR 040</option>
+                        <option value="unidade-dom-orione">Unidade Dom Orione</option>
+                        <option value="unidade-sao-mateus">Unidade São Mateus</option>
+                    </select>
+                </div>
+                
+                <div class="filter-actions">
+                    <button id="applyFilter" class="btn-admin-action">Aplicar Filtro</button>
+                    <button id="clearFilter" class="btn-clear">Limpar Filtro</button>
+                </div>
             </div>
             
             <div class="denuncias-list">
@@ -212,32 +242,6 @@
                     <!-- Estatísticas serão carregadas aqui -->
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal de Configuração -->
-    <div id="configModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Configurações de Acesso</h2>
-            <form id="configForm">
-                <div class="form-group">
-                    <label for="newUsername">Novo Usuário</label>
-                    <input type="text" id="newUsername" required>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Nova Senha</label>
-                    <input type="password" id="newPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirmar Senha</label>
-                    <input type="password" id="confirmPassword" required>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">Salvar</button>
-                    <button type="button" class="btn-clear" id="configCancel">Cancelar</button>
-                </div>
-            </form>
         </div>
     </div>
 

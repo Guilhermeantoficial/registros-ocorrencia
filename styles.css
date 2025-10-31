@@ -143,6 +143,7 @@ input, select, textarea {
     font-family: inherit;
     font-size: 16px;
     transition: border 0.3s;
+    background-color: white;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -311,14 +312,6 @@ textarea {
     background-color: #2980b9;
 }
 
-.btn-admin-action.btn-clear {
-    background-color: #e74c3c;
-}
-
-.btn-admin-action.btn-clear:hover {
-    background-color: #c0392b;
-}
-
 /* Info Section */
 .info-section {
     background-color: white;
@@ -457,27 +450,46 @@ footer {
 /* Área de Administração */
 .admin-controls {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
-.admin-actions, .admin-config {
+.admin-actions {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
+/* Estilos para os filtros corrigidos */
 .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.filter-actions {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    align-items: center;
+    align-items: end;
 }
 
-.filters select, .filters input {
-    flex: 1;
-    min-width: 150px;
+.filter-actions button {
+    height: fit-content;
 }
 
 .denuncias-list {
@@ -641,10 +653,15 @@ footer {
     }
     
     .filters {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
     
-    .filters select, .filters input {
-        width: 100%;
+    .filter-actions {
+        grid-column: 1;
+        justify-content: stretch;
+    }
+    
+    .filter-actions button {
+        flex: 1;
     }
 }
