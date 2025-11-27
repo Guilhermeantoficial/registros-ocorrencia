@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acompanhamento de Ocorrência - CIPA">
+    <title>Acompanhar Ocorrência - Canal CIPA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <header role="banner">
+            <div class="logo">
+                <h1>Canal de Ocorrência</h1>
+                <p>Anônimo e Confidencial</p>
+            </div>
+            <div class="security-badge">
+                <span aria-hidden="true">🔒</span>
+                <p>100% Anônimo</p>
+            </div>
+            <div class="header-actions">
+                <div class="acompanhamento-link">
+                    <a href="registrar.html">📝 Registrar Ocorrência</a>
+                </div>
+                <div class="acompanhamento-link">
+                    <a href="index.html">🏠 Página Inicial</a>
+                </div>
+            </div>
+        </header>
+
+        <main role="main">
+            <section class="protocolo-section" id="secaoAcompanhamento" aria-labelledby="acompanhamento-title">
+                <div class="container">
+                    <h2 id="acompanhamento-title">Acompanhar sua ocorrência</h2>
+                    <p class="section-description">Digite o número do protocolo para acompanhar o andamento da sua ocorrência de forma anônima e segura.</p>
+                    <div class="form-group">
+                        <label for="inputProtocolo">Número do Protocolo</label>
+                        <input type="text" id="inputProtocolo" placeholder="Ex: CIPA-20241201-ABC12">
+                    </div>
+                    <button type="button" onclick="acompanharOcorrencia()" class="btn-submit">🔍 Acompanhar Ocorrência</button>
+                    <div id="statusOcorrencia" class="status-container" role="region" aria-live="polite"></div>
+                </div>
+            </section>
+
+            <!--<section class="info-section" aria-labelledby="info-title">
+                <h2 id="info-title">Como funciona o acompanhamento</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Registro</h3>
+                        <p>Você recebe um protocolo único ao registrar sua ocorrência.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Consulta</h3>
+                        <p>Use o protocolo para consultar o status a qualquer momento.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Atualizações</h3>
+                        <p>A CIPA atualiza o status conforme o andamento do processo.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Privacidade</h3>
+                        <p>Seu anonimato é preservado em todo o processo.</p>
+                    </div>
+                </div>
+            </section>-->
+        </main>
+
+        <footer role="contentinfo">
+            <p>Canal de Ocorrência Anônima - Desenvolvido para a CIPA</p>
+            <p>Este sistema opera em ambiente seguro com sincronização entre dispositivos.</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Login da CIPA -->
+    <div id="loginModal" class="modal" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">🔐</div>
+            <h2 id="loginTitle">Acesso da CIPA</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Entrar</button>
+                    <button type="button" class="btn-clear" id="loginCancel">Cancelar</button>
+                </div>
+            </form>
+            <div class="login-info">
+                <p><strong>Credenciais padrão:</strong></p>
+                <p>Usuário: <code>cipa</code> | Senha: <code>cipa2024</code></p>
+                <p class="warning">⚠️ Altere estas credenciais após o primeiro acesso!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/acompanhar.js"></script>
+</body>
+</html>

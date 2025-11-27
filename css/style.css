@@ -224,7 +224,17 @@ header {
     margin-right: 20px;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    opacity: 0.8; /* Mais sutil */
 }
+
+
+
+/* Ícones mais sutis para as features */
+.feature:nth-child(1) span { content: "🛡️"; } /* Proteção */
+.feature:nth-child(2) span { content: "📋"; } /* Formulário */
+.feature:nth-child(3) span { content: "📤"; } /* Envio */
+.feature:nth-child(4) span { content: "🔍"; } /* Acompanhamento */
+
 
 .feature p {
     color: white;
@@ -852,19 +862,16 @@ footer p {
     background-color: #fff8e1;
     border-radius: 6px;
     border-left: 4px solid #ffc107;
+    display: none; /* Esconder as credenciais */
 }
 
-.login-info code {
-    background-color: #f1f1f1;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-}
-
-.warning {
+/* Manter apenas o aviso */
+.login-info .warning {
+    display: block;
     color: #856404;
     font-size: 14px;
     margin-top: 10px;
+    text-align: center;
 }
 
 /* ============================================= */

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registro de Ocorrência Anônima - CIPA">
+    <title>Registrar Ocorrência - Canal CIPA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <header role="banner">
+            <div class="logo">
+                <h1>Canal de Ocorrência</h1>
+                <p>Anônimo e Confidencial</p>
+            </div>
+            <div class="security-badge">
+                <span aria-hidden="true">🔒</span>
+                <p>100% Anônimo</p>
+            </div>
+            <div class="header-actions">
+                <div class="acompanhamento-link">
+                    <a href="acompanhar.html">🔍 Acompanhar Ocorrência</a>
+                </div>
+                <div class="acompanhamento-link">
+                    <a href="index.html">🏠 Página Inicial</a>
+                </div>
+            </div>
+        </header>
+
+        <main role="main">
+            <section class="form-section" aria-labelledby="form-title">
+                <h2 id="form-title">Faça sua ocorrência</h2>
+                <form id="ocorrenciaForm" novalidate>
+                    <div class="form-group">
+                        <label for="tipo-ocorrencia">Tipo de Ocorrência *</label>
+                        <select id="tipo-ocorrencia" required aria-required="true">
+                            <option value="">Selecione o tipo</option>
+                            <option value="assedio-moral">Assédio Moral</option>
+                            <option value="assedio-sexual">Assédio Sexual</option>
+                            <option value="discriminacao">Discriminação</option>
+                            <option value="violencia">Violência</option>
+                            <option value="assedio-virtual">Assédio Virtual</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo-envolvimento">A ocorrência é para *</label>
+                        <select id="tipo-envolvimento" required aria-required="true">
+                            <option value="">Selecione</option>
+                            <option value="foi-comigo">Foi comigo</option>
+                            <option value="presenciei">Presenciei</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data-ocorrencia">Data da Ocorrência</label>
+                        <input type="date" id="data-ocorrencia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="local-ocorrencia">Local da Ocorrência</label>
+                        <select id="local-ocorrencia">
+                            <option value="">Selecione o local</option>
+                            <option value="home-office">Home office</option>
+                            <option value="ufjf">UFJF</option>
+                            <option value="unidade-br-040">Unidade BR 040</option>
+                            <option value="unidade-dom-orione">Unidade Dom Orione</option>
+                            <option value="unidade-sao-mateus">Unidade São Mateus</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição da Ocorrência *</label>
+                        <textarea id="descricao" required aria-required="true" placeholder="Descreva detalhadamente o que aconteceu..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="evidencias">Evidências (opcional)</label>
+                        <div class="file-upload-area" id="fileUploadArea" role="button" tabindex="0">
+                            <div class="upload-placeholder">
+                                <span aria-hidden="true">📎</span>
+                                <p>Arraste arquivos aqui ou clique para selecionar</p>
+                                <p class="file-types">Suporte: Imagens, PDF, Word, Excel (Máx. 5MB cada)</p>
+                            </div>
+                            <input type="file" id="evidencias" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xls,.xlsx" style="display: none;" aria-describedby="file-types">
+                            <div class="file-preview" id="filePreview" role="region" aria-live="polite"></div>
+                        </div>
+                    </div>
+
+                    <div class="anonymity-notice" role="alert">
+                        <p>⚠️ <strong>Importante:</strong> Este canal é 100% anônimo. Não coleta dados pessoais e não rastreia informações que possam identificar você.</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Enviar Ocorrência</button>
+                        <button type="reset" class="btn-clear">Limpar Formulário</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer role="contentinfo">
+            <p>Canal de Ocorrência Anônima - Desenvolvido para a CIPA</p>
+            <p>Este sistema opera em ambiente seguro com sincronização entre dispositivos.</p>
+        </footer>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div id="confirmationModal" class="modal" role="dialog" aria-labelledby="confirmationTitle" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">✅</div>
+            <h2 id="confirmationTitle">Ocorrência Enviada com Sucesso!</h2>
+            <p>Sua ocorrência foi registrada com sucesso e será encaminhada para a CIPA.</p>
+            <p><strong>Lembre-se:</strong> Não coletamos nenhuma informação que possa identificá-lo.</p>
+            <button id="modalClose" class="btn-modal">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Protocolo -->
+    <div id="protocoloModal" class="modal" role="dialog" aria-labelledby="protocoloTitle" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">📄</div>
+            <h2 id="protocoloTitle">Protocolo de Acompanhamento</h2>
+            <div class="protocolo-info">
+                <p><strong>Número do Protocolo:</strong></p>
+                <div class="protocolo-number" id="protocoloNumber" aria-live="polite"></div>
+                <p class="protocolo-instructions">
+                    🔒 <strong>Guarde este número!</strong><br>
+                    Este é o único modo de acompanhar sua ocorrência preservando o anonimato.
+                </p>
+                <div class="protocolo-tips">
+                    <p>📋 <strong>Dicas:</strong></p>
+                    <ul>
+                        <li>Salve o número em um local seguro</li>
+                        <li>Use a página "Acompanhar Ocorrência"</li>
+                        <li>O protocolo funciona em qualquer dispositivo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="protocolo-actions">
+                <button type="button" onclick="copiarProtocolo()" class="btn-submit">📋 Copiar Protocolo</button>
+                <button type="button" onclick="fecharProtocolo()" class="btn-clear">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login da CIPA -->
+    <div id="loginModal" class="modal" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" role="button" tabindex="0" aria-label="Fechar modal">&times;</span>
+            <div class="modal-icon" aria-hidden="true">🔐</div>
+            <h2 id="loginTitle">Acesso da CIPA</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Entrar</button>
+                    <button type="button" class="btn-clear" id="loginCancel">Cancelar</button>
+                </div>
+            </form>
+            <div class="login-info">
+                <p><strong>Credenciais padrão:</strong></p>
+                <p>Usuário: <code>cipa</code> | Senha: <code>cipa2024</code></p>
+                <p class="warning">⚠️ Altere estas credenciais após o primeiro acesso!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/registrar.js"></script>
+</body>
+</html>
